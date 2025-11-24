@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Développeur - SPA</title>
+  <link rel="stylesheet" href="./microframework/css/app.css" />
+  <link rel="stylesheet" href="./assets/css/portfolio.css" />
+</head>
+<body data-theme="light">
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <div class="brand">Mon Portfolio</div>
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#hero">Accueil</a>
+        <a href="#projects">Projets</a>
+        <a href="#skills">Compétences</a>
+        <a href="#services">Services</a>
+        <a href="#about">À propos</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button">Mode sombre</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero reveal">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Disponible pour alternance & missions freelance</p>
+          <h1>Développeur Frontend</h1>
+          <p class="lead">Je conçois des interfaces web performantes, accessibles et orientées expérience utilisateur.</p>
+          <div class="cta-row">
+            <a class="btn" href="#projects">Voir mes projets</a>
+            <a class="btn btn-secondary" href="#contact">Me contacter</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <p class="m-0">Dernier projet</p>
+          <h3 class="m-t-1">Dashboard analytics</h3>
+          <p class="m-t-1">Refonte complète d'un tableau de bord avec micro-interactions, optimisation des performances et thème sombre.</p>
+          <div class="hero-meta">
+            <span>Vue.js</span>
+            <span>UI design</span>
+            <span>Accessibilité</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section reveal">
+      <div class="container">
+        <header class="section-header">
+          <div>
+            <p class="eyebrow">Projets</p>
+            <h2>Mes réalisations</h2>
+          </div>
+          <div class="filters">
+            <input id="search" type="search" placeholder="Rechercher un projet" aria-label="Recherche projet" />
+            <select id="typeFilter" aria-label="Filtre par type">
+              <option value="all">Tous les types</option>
+            </select>
+          </div>
+        </header>
+        <div id="projectsGrid" class="projects-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal">
+      <div class="container">
+        <p class="eyebrow">Compétences</p>
+        <h2>Un socle technique solide</h2>
+        <div class="skills-grid">
+          <div class="skill">HTML5</div>
+          <div class="skill">CSS3</div>
+          <div class="skill">JavaScript</div>
+          <div class="skill">Vue.js</div>
+          <div class="skill">Node.js</div>
+          <div class="skill">Git</div>
+          <div class="skill">SEO</div>
+          <div class="skill">Accessibilité</div>
+          <div class="skill">Performance web</div>
+          <div class="skill">Design systems</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section reveal">
+      <div class="container">
+        <p class="eyebrow">Services</p>
+        <h2>Comment je peux aider</h2>
+        <div class="services-grid">
+          <article class="service">
+            <h3>Intégration web</h3>
+            <p>Maquettage fidèle aux maquettes Figma, composants réutilisables et responsive.</p>
+          </article>
+          <article class="service">
+            <h3>Création de landing pages</h3>
+            <p>Pages optimisées pour la conversion avec mesures de performance.</p>
+          </article>
+          <article class="service">
+            <h3>Audit & optimisation</h3>
+            <p>Analyse Lighthouse, amélioration de l’accessibilité et du SEO.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section reveal">
+      <div class="container about-grid">
+        <div>
+          <p class="eyebrow">À propos</p>
+          <h2>Parcours & objectifs</h2>
+          <p>Passionné par le web, j’ai construit des projets variés : dashboards, sites vitrines et outils internes. Mon objectif : rejoindre une équipe en alternance pour continuer d’apprendre tout en apportant mes compétences en intégration et en animation front.</p>
+          <p>Je propose également des missions freelance pour accompagner les entreprises sur leurs besoins d’interface, de performance et d’accessibilité.</p>
+        </div>
+        <div class="about-cards">
+          <div class="about-card">
+            <h3>Valeurs</h3>
+            <p>Rigueur, collaboration, écoute des utilisateurs.</p>
+          </div>
+          <div class="about-card">
+            <h3>Façon de travailler</h3>
+            <p>Sprints courts, prototypage rapide, feedbacks continus.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section reveal">
+      <div class="container contact-grid">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Restons en contact</h2>
+          <ul class="contact-list">
+            <li><span class="label">Email</span> contact[at]portfolio.dev</li>
+            <li><span class="label">LinkedIn</span> linkedin.com/in/mon-profil</li>
+            <li><span class="label">CV</span> <a href="#" aria-label="Télécharger mon CV">Télécharger le PDF</a></li>
+          </ul>
+        </div>
+        <form class="contact-form" novalidate>
+          <label>Nom
+            <input type="text" name="name" required />
+          </label>
+          <label>Email
+            <input type="email" name="email" required />
+          </label>
+          <label>Message
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button type="submit" class="btn">Envoyer</button>
+          <p class="form-hint">Le formulaire est non fonctionnel pour cette version. Données non envoyées.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="m-0">© 2024 Portfolio Développeur. Alternance & freelance.</p>
+    </div>
+  </footer>
+
+  <script src="./assets/js/portfolio.js"></script>
+</body>
+</html>
