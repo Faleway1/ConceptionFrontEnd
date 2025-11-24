@@ -1,23 +1,25 @@
 :root {
   --surface: #ffffff;
-  --surface-alt: #f8fafc;
+  --surface-alt: #f5f7fb;
+  --text: #0f172a;
   --text-muted: #475569;
   --border: #e2e8f0;
 }
 
 body {
   background: var(--surface-alt);
-  color: #0f172a;
+  color: var(--text);
   scroll-behavior: smooth;
 }
 
 body[data-theme="dark"] {
   --surface: #0f172a;
   --surface-alt: #0b1222;
+  --text: #e2e8f0;
   --text-muted: #94a3b8;
   --border: #1f2937;
   background: var(--surface-alt);
-  color: #e2e8f0;
+  color: var(--text);
 }
 
 body[data-theme="dark"] .surface,
@@ -27,7 +29,7 @@ body[data-theme="dark"] .about-card,
 body[data-theme="dark"] .service,
 body[data-theme="dark"] .contact-form {
   background: var(--surface);
-  color: #e2e8f0;
+  color: var(--text);
   border-color: var(--border);
 }
 
@@ -36,12 +38,21 @@ body[data-theme="dark"] .contact-form {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid var(--border);
 }
 
 body[data-theme="dark"] .site-header {
   background: rgba(15, 23, 42, 0.9);
+}
+
+.card,
+.project-card,
+.about-card,
+.service {
+  box-shadow: none;
+  border-color: var(--border);
+  background: var(--surface);
 }
 
 .nav-wrapper {
@@ -73,6 +84,7 @@ body[data-theme="dark"] .site-header {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 700;
+  color: inherit;
 }
 
 body[data-theme="dark"] .theme-toggle {
@@ -97,7 +109,7 @@ body[data-theme="dark"] .theme-toggle {
 }
 
 .hero {
-  background: linear-gradient(120deg, rgba(110, 82, 247, 0.08), rgba(120, 255, 203, 0.12));
+  background: linear-gradient(120deg, rgba(110, 82, 247, 0.05), rgba(120, 255, 203, 0.08));
 }
 
 .eyebrow {
@@ -124,12 +136,14 @@ body[data-theme="dark"] .theme-toggle {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .filters input,
-.filters select {
+.filters select,
+.theme-toggle {
   padding: 10px 12px;
-  border-radius: 12px;
+  border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
 }
@@ -138,6 +152,11 @@ body[data-theme="dark"] .theme-toggle {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100%;
+}
+
+#projectsGrid {
+  align-items: stretch;
 }
 
 .project-header {
@@ -208,13 +227,22 @@ body[data-theme="dark"] .hero-meta span {
   padding: 16px;
   background: var(--surface);
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
+  height: 100%;
+}
+
+.service,
+.about-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 160px;
 }
 
 body[data-theme="dark"] .skill,
 body[data-theme="dark"] .service,
 body[data-theme="dark"] .about-card {
-  color: #e2e8f0;
+  color: var(--text);
 }
 
 .contact-list {
