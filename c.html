@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugo CSS – Démonstration</title>
+  <link rel="stylesheet" href="./plugo.css" />
+  <style>
+    body {
+      background: #f8fafc;
+      padding-bottom: 80px;
+    }
+    header {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: white;
+      padding: 64px 0;
+      margin-bottom: 32px;
+    }
+    .swatch {
+      height: 96px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .demo-grid .box {
+      background: white;
+      border: 1px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      color: #475569;
+      font-weight: 600;
+    }
+    .demo-utilities .box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      color: #0f172a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <p class="m-0 text-warning-light" style="font-weight:700; letter-spacing:2px;">PLUGO CSS</p>
+      <h1 style="margin-top:8px; color:#fff;">Page de démonstration</h1>
+      <p style="max-width:640px; color:#fff;">Cette page montre rapidement les composants et utilitaires générés par l'outil de build Plugo. Redimensionnez la fenêtre pour tester les classes responsives.</p>
+      <div class="row" style="margin-top:16px; gap:12px;">
+        <a class="btn" href="#components">Voir les composants</a>
+        <a class="btn btn-secondary" href="#utilities">Voir les utilitaires</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container p-b-6">
+    <section id="colors" class="m-b-5">
+      <h2>Palette dynamique</h2>
+      <p>Les couleurs principales et leurs variantes claire/sombre sont calculées automatiquement à partir de <code>plugo.config.js</code>.</p>
+      <div class="row" style="gap:12px;">
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-primary">Primary</div>
+        </div>
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-primary-light">Primary light</div>
+        </div>
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-primary-dark">Primary dark</div>
+        </div>
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-success">Success</div>
+        </div>
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-warning">Warning</div>
+        </div>
+        <div class="col-3 col-6 sm:col-3">
+          <div class="swatch bg-danger">Danger</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="grid" class="m-b-5">
+      <h2>Grille responsive</h2>
+      <p>La grille à 12 colonnes accepte des préfixes responsive comme <code>sm:</code>, <code>md:</code>, <code>lg:</code>, <code>xl:</code>.</p>
+      <div class="row demo-grid">
+        <div class="col-12 md:col-6">
+          <div class="box">col-12 sur mobile, col-6 en ≥768px</div>
+        </div>
+        <div class="col-12 md:col-6">
+          <div class="box">col-12 sur mobile, col-6 en ≥768px</div>
+        </div>
+        <div class="col-6 md:col-4">
+          <div class="box">col-6 → col-4</div>
+        </div>
+        <div class="col-6 md:col-4">
+          <div class="box">col-6 → col-4</div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="box">col-12 → col-4</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="components" class="m-b-5">
+      <h2>Composants</h2>
+      <div class="row">
+        <div class="col-12 md:col-6">
+          <div class="card">
+            <h3>Card</h3>
+            <p class="m-b-3">Un bloc avec ombre et rayon par défaut. Utilisez-le pour encadrer du contenu.</p>
+            <div class="row" style="gap:8px;">
+              <a class="btn" href="#">Action primaire</a>
+              <a class="btn btn-secondary" href="#">Action secondaire</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6">
+          <div class="card bg-primary-light" style="border-color: var(--color-primary);">
+            <h3 class="m-b-2">Alertes</h3>
+            <div class="alert alert-primary m-b-2">Alerte primaire</div>
+            <div class="alert alert-success m-b-2">Succès !</div>
+            <div class="alert alert-warning m-b-2">Attention</div>
+            <div class="alert alert-danger">Erreur critique</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="utilities" class="m-b-5 demo-utilities">
+      <h2>Utilitaires de spacing & flex</h2>
+      <p>Combinez les classes <code>m-*</code>, <code>p-*</code>, et les helpers flex pour ajuster rapidement vos mises en page.</p>
+      <div class="row" style="gap:12px;">
+        <div class="col-12 md:col-6">
+          <div class="box p-4">
+            <p class="m-0">p-4 applique un padding basé sur <code>spacing.baseUnit</code>.</p>
+            <div class="row m-t-3" style="gap:8px;">
+              <span class="p-2 bg-warning-light border-warning">p-2</span>
+              <span class="p-3 bg-success-light border-success">p-3</span>
+              <span class="p-4 bg-primary-light border-primary">p-4</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6">
+          <div class="box p-4">
+            <p class="m-0">Utilitaires flex</p>
+            <div class="row m-t-3" style="gap:8px; align-items:center;">
+              <div class="bg-primary p-2" style="border-radius:8px; color:#fff;">.row</div>
+              <div class="bg-success p-2" style="border-radius:8px; color:#0f172a;">flex-wrap</div>
+              <div class="bg-warning p-2" style="border-radius:8px; color:#0f172a;">gap 16px</div>
+            </div>
+            <p class="m-0 m-t-3">Ajoutez des préfixes (ex: <code>lg:m-6</code>) pour changer le comportement aux breakpoints.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
