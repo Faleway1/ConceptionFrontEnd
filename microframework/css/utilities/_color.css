@@ -1,0 +1,4 @@
+.primary-border { border-color: var(--color-primary); }
+.success-border { border-color: var(--color-success); }
+.warning-border { border-color: var(--color-warning); }
+.danger-border { border-color: var(--color-danger); }

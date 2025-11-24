@@ -1,0 +1,43 @@
+:root {
+  --color-primary: #6e52f7;
+  --color-primary-light: #8871f8;
+  --color-primary-dark: #5a43cb;
+  --color-success: #78ffcb;
+  --color-success-light: #90ffd4;
+  --color-success-dark: #62d1a6;
+  --color-warning: #ffdb63;
+  --color-warning-light: #ffe17f;
+  --color-warning-dark: #d1b451;
+  --color-danger: #ff5e78;
+  --color-danger-light: #ff7b90;
+  --color-danger-dark: #d14d62;
+}
+
+.text-primary { color: var(--color-primary); }
+.text-primary-light { color: var(--color-primary-light); }
+.text-primary-dark { color: var(--color-primary-dark); }
+.bg-primary { background-color: var(--color-primary); color: #0f172a; }
+.bg-primary-light { background-color: var(--color-primary-light); color: #0f172a; }
+.bg-primary-dark { background-color: var(--color-primary-dark); color: #f8fafc; }
+.border-primary { border-color: var(--color-primary); }
+.text-success { color: var(--color-success); }
+.text-success-light { color: var(--color-success-light); }
+.text-success-dark { color: var(--color-success-dark); }
+.bg-success { background-color: var(--color-success); color: #0f172a; }
+.bg-success-light { background-color: var(--color-success-light); color: #0f172a; }
+.bg-success-dark { background-color: var(--color-success-dark); color: #f8fafc; }
+.border-success { border-color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-warning-light { color: var(--color-warning-light); }
+.text-warning-dark { color: var(--color-warning-dark); }
+.bg-warning { background-color: var(--color-warning); color: #0f172a; }
+.bg-warning-light { background-color: var(--color-warning-light); color: #0f172a; }
+.bg-warning-dark { background-color: var(--color-warning-dark); color: #f8fafc; }
+.border-warning { border-color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-danger-light { color: var(--color-danger-light); }
+.text-danger-dark { color: var(--color-danger-dark); }
+.bg-danger { background-color: var(--color-danger); color: #0f172a; }
+.bg-danger-light { background-color: var(--color-danger-light); color: #0f172a; }
+.bg-danger-dark { background-color: var(--color-danger-dark); color: #f8fafc; }
+.border-danger { border-color: var(--color-danger); }
