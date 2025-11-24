@@ -34,9 +34,7 @@ function adjustColor(hex, amount) {
   const newR = adjust(r);
   const newG = adjust(g);
   const newB = adjust(b);
-  return `#${((1 << 24) + (newR << 16) + (newG << 8) + newB)
-    .toString(16)
-    .slice(1)}`;
+  return `#${((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1)}`;
 }
 
 function generateColorPalette(colors, darkMode) {
@@ -71,11 +69,14 @@ function generateColorPalette(colors, darkMode) {
       darkRoot += `    --color-${name}-light: ${lifted};\n`;
       darkRoot += `    --color-${name}-dark: ${adjustColor(darker, -0.08)};\n`;
     });
-    darkRoot +=
-      '  }\n  body { background-color: #0f172a; color: #e2e8f0; }\n}\n\n';
+    darkRoot += '  }\n  body { background-color: #0f172a; color: #e2e8f0; }\n}\n\n';
   }
 
-  return base + utilities + darkRoot;
+  return { variables: base + darkRoot, colorUtilities: utilities };
+}
+
+function generateResetCss() {
+  return `* { box-sizing: border-box; }\nbody, h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }\nimg, picture { max-width: 100%; display: block; }\nul, ol { margin: 0; padding: 0; list-style: none; }\n\n`;
 }
 
 function generateTypography(theme) {
@@ -85,11 +86,16 @@ function generateTypography(theme) {
     `h1, h2, h3, h4, h5, h6 {\n  font-family: ${typography.headlines};\n  line-height: 120%;\n  margin-bottom: 0.5em;\n}\n`;
 }
 
-function generateLayout(theme) {
+function generateContainer(theme) {
   const { layout, spacing } = theme;
   const { number: baseNumber, unit: baseUnit } = parseUnit(spacing?.baseUnit || '16px');
-  let css = `.container {\n  max-width: ${layout.container};\n  margin: 0 auto;\n  padding: 0 ${baseNumber}${baseUnit};\n}\n\n`;
-  css += `.row {\n  display: flex;\n  flex-wrap: wrap;\n  gap: ${baseNumber}${baseUnit};\n}\n\n`;
+  return `.container {\n  max-width: ${layout.container};\n  margin: 0 auto;\n  padding: 0 ${baseNumber}${baseUnit};\n}\n\n`;
+}
+
+function generateGrid(theme) {
+  const { layout, spacing } = theme;
+  const { number: baseNumber, unit: baseUnit } = parseUnit(spacing?.baseUnit || '16px');
+  let css = `.row {\n  display: flex;\n  flex-wrap: wrap;\n  gap: ${baseNumber}${baseUnit};\n}\n\n`;
 
   for (let i = 1; i <= layout.cols; i += 1) {
     const percentage = ((i / layout.cols) * 100).toFixed(4);
@@ -198,50 +204,53 @@ function generateTransitionUtility(theme) {
   return `.transition { transition: all ${duration} ${type}; }\n`;
 }
 
-function generateComponents(components, theme) {
+function generateComponents(config, theme) {
+  const { components } = config;
   const { spacing, transition } = theme;
   const basePadding = spacingValue(spacing.baseUnit, 0.75);
   const baseMargin = spacingValue(spacing.baseUnit, 0.5);
-  let css = '';
+
+  const parts = {};
 
   if (components.includes('button')) {
-    css += `.btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: ${spacingValue(spacing.baseUnit, 0.5)};\n  padding: ${basePadding} ${spacingValue(spacing.baseUnit, 1.25)};\n  border-radius: 9999px;\n  border: 1px solid var(--color-primary);\n  background: var(--color-primary);\n  color: white;\n  font-weight: 600;\n  cursor: pointer;\n  text-decoration: none;\n  transition: background-color ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.btn:hover { transform: translateY(-1px); background: var(--color-primary-dark); }\n.btn:active { transform: translateY(0); }\n.btn-secondary { background: white; color: var(--color-primary); border-color: var(--color-primary); }\n.btn-secondary:hover { background: var(--color-primary-light); color: #0f172a; }\n\n`;
+    parts.button = `.btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: ${spacingValue(spacing.baseUnit, 0.5)};\n  padding: ${basePadding} ${spacingValue(spacing.baseUnit, 1.25)};\n  border-radius: 9999px;\n  border: 1px solid var(--color-primary);\n  background: var(--color-primary);\n  color: white;\n  font-weight: 600;\n  cursor: pointer;\n  text-decoration: none;\n  transition: background-color ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.btn:hover { transform: translateY(-1px); background: var(--color-primary-dark); }\n.btn:active { transform: translateY(0); }\n.btn-secondary { background: white; color: var(--color-primary); border-color: var(--color-primary); }\n.btn-secondary:hover { background: var(--color-primary-light); color: #0f172a; }\n\n`;
   }
 
   if (components.includes('card')) {
-    css += `.card {\n  background: white;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  padding: ${spacingValue(spacing.baseUnit, 1.5)};\n  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);\n  transition: box-shadow ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.card:hover { box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); transform: translateY(-2px); }\n.card + .card { margin-top: ${baseMargin}; }\n\n`;
+    parts.card = `.card {\n  background: white;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  padding: ${spacingValue(spacing.baseUnit, 1.5)};\n  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);\n  transition: box-shadow ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.card:hover { box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); transform: translateY(-2px); }\n.card + .card { margin-top: ${baseMargin}; }\n\n`;
   }
 
   if (components.includes('alert')) {
-    css += `.alert {\n  padding: ${basePadding};\n  border-radius: 12px;\n  border: 1px solid transparent;\n  display: flex;\n  align-items: center;\n  gap: ${spacingValue(spacing.baseUnit, 0.5)};\n  font-weight: 600;\n}\n`;
+    let alertCss = `.alert {\n  padding: ${basePadding};\n  border-radius: 12px;\n  border: 1px solid transparent;\n  display: flex;\n  align-items: center;\n  gap: ${spacingValue(spacing.baseUnit, 0.5)};\n  font-weight: 600;\n}\n`;
     ['primary', 'success', 'warning', 'danger'].forEach((tone) => {
-      css += `.alert-${tone} { background: var(--color-${tone}-light); border-color: var(--color-${tone}); color: #0f172a; }\n`;
+      alertCss += `.alert-${tone} { background: var(--color-${tone}-light); border-color: var(--color-${tone}); color: #0f172a; }\n`;
     });
-    css += '\n';
+    parts.alert = `${alertCss}\n`;
   }
 
-  return css;
+  return parts;
 }
 
 function generateUtilityCss(config) {
   const { utilities, theme } = config;
-  let css = '';
+  const parts = {};
+
   if (utilities.includes('spacing')) {
-    css += generateSpacingUtilities(theme);
+    parts.spacing = generateSpacingUtilities(theme);
   }
   if (utilities.includes('flex')) {
-    css += generateFlexUtilities(theme.layout);
+    parts.flex = generateFlexUtilities(theme.layout);
   }
   if (utilities.includes('color')) {
-    css += Object.keys(theme.colors)
-      .map((name) => `.${name}-border { border-color: var(--color-${name}); }\n`) 
+    parts.color = Object.keys(theme.colors)
+      .map((name) => `.${name}-border { border-color: var(--color-${name}); }\n`)
       .join('');
   }
   if (utilities.includes('image')) {
-    css += generateImageUtilities();
+    parts.image = generateImageUtilities();
   }
-  css += generateTransitionUtility(theme);
-  return css;
+  parts.transition = generateTransitionUtility(theme);
+  return parts;
 }
 
 function applyAutoprefix(css) {
@@ -285,28 +294,96 @@ async function loadConfig() {
   return module.default || module.config || {};
 }
 
+async function ensureDir(dirPath) {
+  await fs.mkdir(dirPath, { recursive: true });
+}
+
+async function writePrefixed(filePath, css) {
+  const prefixed = applyAutoprefix(css);
+  await fs.writeFile(filePath, prefixed, 'utf8');
+  return prefixed;
+}
+
 async function build() {
   const config = await loadConfig();
-  const { theme, components } = config;
+  const { theme } = config;
 
-  let css = `/*\n  Plugo CSS Framework\n  Generated automatically from plugo.config.js\n*/\n\n`;
-  css += generateColorPalette(theme.colors, config.darkMode);
-  css += generateTypography(theme);
-  css += '\n' + generateLayout(theme);
-  css += '\n' + generateComponents(components, theme);
-  css += '\n/* Utilities */\n' + generateUtilityCss(config);
+  const baseDir = path.resolve(__dirname, '../microframework/css');
+  const baseFolder = path.join(baseDir, 'base');
+  const componentsFolder = path.join(baseDir, 'components');
+  const layoutFolder = path.join(baseDir, 'layout');
+  const utilitiesFolder = path.join(baseDir, 'utilities');
 
-  const prefixed = applyAutoprefix(css);
-  const minified = minifyCSS(prefixed);
+  await Promise.all([
+    ensureDir(baseFolder),
+    ensureDir(componentsFolder),
+    ensureDir(layoutFolder),
+    ensureDir(utilitiesFolder)
+  ]);
 
-  const cssPath = path.resolve(__dirname, '../plugo.css');
-  const minPath = path.resolve(__dirname, '../plugo.min.css');
-  await fs.writeFile(cssPath, prefixed, 'utf8');
-  await fs.writeFile(minPath, minified, 'utf8');
+  const { variables, colorUtilities } = generateColorPalette(theme.colors, config.darkMode);
+  const resetCss = generateResetCss();
+  const typographyCss = generateTypography(theme);
+  const containerCss = generateContainer(theme);
+  const gridCss = generateGrid(theme);
+  const components = generateComponents(config, theme);
+  const utilities = generateUtilityCss(config);
+
+  await writePrefixed(path.join(baseDir, 'config.css'), variables + colorUtilities);
+  await writePrefixed(path.join(baseFolder, '_reset.css'), resetCss);
+  await writePrefixed(path.join(baseFolder, '_typography.css'), typographyCss);
+  await writePrefixed(path.join(baseFolder, 'all.css'), `${resetCss}\n${typographyCss}`);
+
+  await writePrefixed(path.join(layoutFolder, '_container.css'), containerCss);
+  await writePrefixed(path.join(layoutFolder, '_grid.css'), gridCss);
+  await writePrefixed(path.join(layoutFolder, 'all.css'), `${containerCss}\n${gridCss}`);
+
+  let componentsBundle = '';
+  if (components.button) {
+    componentsBundle += components.button;
+    await writePrefixed(path.join(componentsFolder, '_button.css'), components.button);
+  }
+  if (components.card) {
+    componentsBundle += components.card;
+    await writePrefixed(path.join(componentsFolder, '_card.css'), components.card);
+  }
+  if (components.alert) {
+    componentsBundle += components.alert;
+    await writePrefixed(path.join(componentsFolder, '_alert.css'), components.alert);
+  }
+  await writePrefixed(path.join(componentsFolder, 'all.css'), componentsBundle);
+
+  let utilitiesBundle = '';
+  if (utilities.spacing) {
+    utilitiesBundle += utilities.spacing;
+    await writePrefixed(path.join(utilitiesFolder, '_spacing.css'), utilities.spacing);
+  }
+  if (utilities.flex) {
+    utilitiesBundle += utilities.flex;
+    await writePrefixed(path.join(utilitiesFolder, '_flex.css'), utilities.flex);
+  }
+  if (utilities.color) {
+    utilitiesBundle += utilities.color;
+    await writePrefixed(path.join(utilitiesFolder, '_color.css'), utilities.color);
+  }
+  if (utilities.image) {
+    utilitiesBundle += utilities.image;
+    await writePrefixed(path.join(utilitiesFolder, '_image.css'), utilities.image);
+  }
+  utilitiesBundle += utilities.transition;
+  await writePrefixed(path.join(utilitiesFolder, '_transition.css'), utilities.transition);
+  await writePrefixed(path.join(utilitiesFolder, 'all.css'), utilitiesBundle);
+
+  const appCss = `/*\n  Plugo CSS Framework\n  Generated automatically from plugo.config.js\n*/\n\n${variables}${resetCss}${typographyCss}${containerCss}${gridCss}${componentsBundle}\n/* Utilities */\n${utilitiesBundle}`;
+  const prefixedApp = await writePrefixed(path.join(baseDir, 'app.css'), appCss);
+
+  const minified = minifyCSS(prefixedApp);
+  await fs.writeFile(path.resolve(__dirname, '../plugo.css'), prefixedApp, 'utf8');
+  await fs.writeFile(path.resolve(__dirname, '../plugo.min.css'), minified, 'utf8');
 
   const report = {
-    classes: countClasses(prefixed),
-    readableSize: `${Buffer.byteLength(prefixed)} bytes`,
+    classes: countClasses(prefixedApp),
+    readableSize: `${Buffer.byteLength(prefixedApp)} bytes`,
     minifiedSize: `${Buffer.byteLength(minified)} bytes`
   };
 
