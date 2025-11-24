@@ -1,0 +1,11 @@
+body {
+  font-family: Arial, sans-serif;
+  line-height: 125%;
+  color: #0f172a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Verdana, sans-serif;
+  line-height: 120%;
+  margin-bottom: 0.5em;
+}
