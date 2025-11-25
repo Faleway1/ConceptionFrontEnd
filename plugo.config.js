@@ -12,7 +12,7 @@ const config = {
             headlines: 'Verdana, sans-serif'
         },
         layout: {
-            container: '900px',
+            container: '1200px',
             cols: 12,
             breakpoints: {
                 sm: '500px',
