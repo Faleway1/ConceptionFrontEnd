@@ -1,0 +1,17 @@
+* { box-sizing: border-box; }
+body, h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
+img, picture { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 125%;
+  color: #0f172a;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Verdana, sans-serif;
+  line-height: 120%;
+  margin-bottom: 0.5em;
+}
