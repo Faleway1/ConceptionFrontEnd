@@ -15,7 +15,7 @@ const config = {
             container: '1200px',
             cols: 12,
             breakpoints: {
-                sm: '500px',
+                sm: '767px',
                 md: '768px',
                 lg: '1024px',
                 xl: '1280px'

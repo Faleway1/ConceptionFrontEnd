@@ -37,7 +37,6 @@
 .card:hover { -webkit-box-shadow:
   box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); -webkit-transform:
   transform: translateY(-2px); }
-.card + .card { margin-top: 8px; }
 
 .alert {
   padding: 12px;
