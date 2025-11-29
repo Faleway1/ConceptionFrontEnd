@@ -13,6 +13,12 @@ const state = {
 
 function applyTheme(theme) {
   document.body.setAttribute('data-theme', theme);
+  document.body.classList.remove('bg-primary-light', 'text-primary-dark', 'bg-primary-dark', 'text-primary-light');
+  if (theme === 'dark') {
+    document.body.classList.add('bg-primary-dark', 'text-primary-light');
+  } else {
+    document.body.classList.add('bg-primary-light', 'text-primary-dark');
+  }
   themeToggle.textContent = theme === 'dark' ? 'Mode clair' : 'Mode sombre';
   localStorage.setItem('portfolio-theme', theme);
   state.theme = theme;
@@ -52,19 +58,19 @@ function smoothScrollSetup() {
 
 function createProjectCard(project) {
   const card = document.createElement('article');
-  card.className = 'card project-card reveal col-12 justify-between';
+  card.className = 'card flex flex-col gap-2 reveal col-12 sm:col-6 lg:col-4';
   card.dataset.type = project.type;
 
   const header = document.createElement('div');
-  header.className = 'project-header';
+  header.className = 'project-header flex items-center justify-between gap-2';
   header.innerHTML = `<h3 class="m-0">${project.title}</h3><p class="m-0 project-type">${project.type}</p>`;
 
   const meta = document.createElement('div');
-  meta.className = 'project-meta';
-  meta.innerHTML = project.tags.map((tag) => `<span>${tag}</span>`).join('');
+  meta.className = 'project-meta flex flex-wrap gap-2';
+  meta.innerHTML = project.tags.map((tag) => `<span class="btn btn-secondary m-0">${tag}</span>`).join('');
 
   const description = document.createElement('p');
-  description.className = 'project-description';
+  description.className = 'project-description m-0';
   description.textContent = project.description;
 
   const toggle = document.createElement('button');

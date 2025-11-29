@@ -1,36 +1,20 @@
-:root {
-  --surface: #ffffff;
-  --surface-alt: #f5f7fb;
-  --text: #0f172a;
-  --text-muted: #475569;
-  --border: #e2e8f0;
-}
-
 body {
-  background: var(--surface-alt);
-  color: var(--text);
   scroll-behavior: smooth;
+  transition: background-color 300ms ease, color 300ms ease;
 }
 
 body[data-theme="dark"] {
-  --surface: #0f172a;
-  --surface-alt: #0b1222;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --border: #1f2937;
-  background: var(--surface-alt);
-  color: var(--text);
+  background: var(--color-primary-dark);
+  color: #f8fafc;
 }
 
-body[data-theme="dark"] .surface,
 body[data-theme="dark"] .card,
-body[data-theme="dark"] .project-card,
-body[data-theme="dark"] .about-card,
 body[data-theme="dark"] .service,
+body[data-theme="dark"] .about-card,
 body[data-theme="dark"] .contact-form {
-  background: var(--surface);
-  color: var(--text);
-  border-color: var(--border);
+  background: var(--color-primary);
+  color: #0f172a;
+  border-color: var(--color-primary-dark);
 }
 
 .site-header {
@@ -38,62 +22,13 @@ body[data-theme="dark"] .contact-form {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid var(--border);
-}
-
-body[data-theme="dark"] .site-header {
-  background: rgba(15, 23, 42, 0.9);
-}
-
-.row > [class*="col-"] {
-  display: flex;
-  min-width: 260px;
-}
-
-.card,
-.project-card,
-.about-card,
-.service {
-  box-shadow: none;
-  border-color: var(--border);
-  background: var(--surface);
-}
-
-.nav-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .nav a {
   text-decoration: none;
-  color: inherit;
-  font-weight: 600;
-}
-
-.nav a:hover {
-  color: var(--color-primary);
-}
-
-.theme-toggle {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 10px 14px;
-  border-radius: 999px;
-  cursor: pointer;
   font-weight: 700;
-  color: inherit;
-}
-
-body[data-theme="dark"] .theme-toggle {
-  background: #111827;
 }
 
 .burger {
@@ -126,70 +61,13 @@ body[data-theme="dark"] .theme-toggle {
 }
 
 .lead {
-  color: var(--text-muted);
-}
-
-.section-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
+  color: #475569;
 }
 
 .filters input,
-.filters select,
-.theme-toggle {
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-height: 260px;
-  width: 100%;
-  height: 100%;
-}
-
-#projectsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2,3fr);
-  align-items: stretch;
-}
-
-@media (max-width: 667px) { 
-  #projectsGrid {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1,3fr);
-  }
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-template-rows: repeat(4,3fr);
-  }
-}
-
-.project-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.project-type {
-  color: var(--text-muted);
-  font-weight: 600;
+.filters select {
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
 }
 
 .project-meta,
@@ -199,102 +77,24 @@ body[data-theme="dark"] .theme-toggle {
   gap: 8px;
 }
 
-.project-meta span,
-.hero-meta span {
-  background: rgba(15, 23, 42, 0.06);
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-body[data-theme="dark"] .project-meta span,
-body[data-theme="dark"] .hero-meta span {
-  background: rgba(226, 232, 240, 0.1);
-}
-
 .project-description {
   display: none;
-  color: var(--text-muted);
+  color: #475569;
 }
 
 .project-description.is-visible {
   display: block;
 }
 
-.skills-grid,
-.services-grid,
-.contact-grid,
-.about-grid {
-  display: grid;
-  gap: 16px;
-}
-
-.about-cards {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.skills-grid {
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4,3fr);
-}
-
-
-.services-grid,
-.about-grid,
-.contact-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-.skill,
-.service,
-.about-card {
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  background: var(--surface);
-  font-weight: 700;
-  color: var(--text);
-  height: 100%;
-}
-
-.service,
-.about-card {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-height: 220px;
-}
-
-body[data-theme="dark"] .skill,
-body[data-theme="dark"] .service,
-body[data-theme="dark"] .about-card {
-  color: var(--text);
-}
-
 .contact-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  gap: 8px;
 }
 
 .contact-list .label {
   font-weight: 700;
-  color: var(--text-muted);
   margin-right: 8px;
-}
-
-.contact-form {
-  display: grid;
-  gap: 12px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  background: var(--surface);
 }
 
 .contact-form input,
@@ -302,22 +102,20 @@ body[data-theme="dark"] .about-card {
   width: 100%;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface-alt);
-  color: inherit;
+  border: 1px solid var(--color-primary-light);
 }
 
 .form-hint {
-  color: var(--text-muted);
+  color: #475569;
   font-size: 14px;
   margin: 0;
 }
 
 .site-footer {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-primary-light);
   padding: 24px 0;
   text-align: center;
-  color: var(--text-muted);
+  color: #475569;
 }
 
 .reveal {
@@ -336,8 +134,8 @@ body[data-theme="dark"] .about-card {
     position: absolute;
     inset: 64px 16px auto 16px;
     flex-direction: column;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
     border-radius: 12px;
     padding: 16px;
     display: none;
