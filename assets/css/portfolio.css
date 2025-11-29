@@ -1,0 +1,151 @@
+body {
+  scroll-behavior: smooth;
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+body[data-theme="dark"] {
+  background: var(--color-primary-dark);
+  color: #f8fafc;
+}
+
+body[data-theme="dark"] .card,
+body[data-theme="dark"] .service,
+body[data-theme="dark"] .about-card,
+body[data-theme="dark"] .contact-form {
+  background: var(--color-primary);
+  color: #0f172a;
+  border-color: var(--color-primary-dark);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  border-width: 1px;
+  border-style: solid;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.burger span {
+  width: 24px;
+  height: 3px;
+  background: currentColor;
+  display: block;
+}
+
+.hero {
+  background: linear-gradient(120deg, rgba(110, 82, 247, 0.05), rgba(120, 255, 203, 0.08));
+}
+
+.eyebrow {
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.lead {
+  color: #475569;
+}
+
+.filters input,
+.filters select {
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
+}
+
+.project-meta,
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-description {
+  display: none;
+  color: #475569;
+}
+
+.project-description.is-visible {
+  display: block;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-list .label {
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-primary-light);
+}
+
+.form-hint {
+  color: #475569;
+  font-size: 14px;
+  margin: 0;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-primary-light);
+  padding: 24px 0;
+  text-align: center;
+  color: #475569;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 500ms ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    position: absolute;
+    inset: 64px 16px auto 16px;
+    flex-direction: column;
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 16px;
+    display: none;
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+}

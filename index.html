@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Développeur - SPA</title>
+  <link rel="stylesheet" href="./microframework/css/app.css" />
+  <link rel="stylesheet" href="./assets/css/portfolio.css" />
+</head>
+  <body data-theme="light" class="bg-primary-light">
+  <header class="site-header bg-white border-primary">
+    <div class="container nav-wrapper flex items-center justify-between gap-3 p-y-3">
+      <div class="brand text-primary">Mon Portfolio</div>
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav flex items-center gap-3 flex-wrap" aria-label="Navigation principale">
+        <a class="btn btn-secondary" href="#hero">Accueil</a>
+        <a class="btn btn-secondary" href="#projects">Projets</a>
+        <a class="btn btn-secondary" href="#skills">Compétences</a>
+        <a class="btn btn-secondary" href="#services">Services</a>
+        <a class="btn btn-secondary" href="#about">À propos</a>
+        <a class="btn btn-secondary" href="#contact">Contact</a>
+        <button class="theme-toggle btn" type="button">Mode sombre</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero p-y-7 bg-primary-light reveal">
+      <div class="container">
+        <div class="row items-center">
+          <div class="col-12 md:col-7 flex flex-col gap-3">
+            <p class="eyebrow m-0 text-primary">Disponible pour alternance & missions freelance</p>
+            <h1 class="m-0">Développeur Frontend</h1>
+            <p class="lead m-0 text-primary-dark">Je conçois des interfaces web performantes, accessibles et orientées expérience utilisateur.</p>
+            <div class="flex gap-3 flex-wrap">
+              <a class="btn" href="#projects">Voir mes projets</a>
+              <a class="btn btn-secondary" href="#contact">Me contacter</a>
+            </div>
+          </div>
+          <div class="col-12 md:col-5">
+            <div class="card flex flex-col gap-2">
+              <p class="m-0 text-primary">Dernier projet</p>
+              <h3 class="m-0">Dashboard analytics</h3>
+              <p class="m-0 lead text-primary-dark">Refonte complète d'un tableau de bord avec micro-interactions, optimisation des performances et thème sombre.</p>
+              <div class="hero-meta flex flex-wrap gap-2">
+                <span class="btn btn-secondary m-0">Vue.js</span>
+                <span class="btn btn-secondary m-0">UI design</span>
+                <span class="btn btn-secondary m-0">Accessibilité</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section p-y-6 bg-white reveal">
+      <div class="container flex flex-col gap-4">
+        <header class="section-header flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-col gap-1">
+            <p class="eyebrow m-0 text-primary">Projets</p>
+            <h2 class="m-0">Mes réalisations</h2>
+          </div>
+          <div class="filters flex flex-wrap items-center gap-2">
+            <input id="search" class="p-2 border-primary" type="search" placeholder="Rechercher un projet" aria-label="Recherche projet" />
+            <select id="typeFilter" class="p-2 border-primary" aria-label="Filtre par type">
+              <option value="all">Tous les types</option>
+            </select>
+          </div>
+        </header>
+        <div id="projectsGrid" class="row" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="skills" class="section p-y-6 bg-primary-light reveal">
+      <div class="container flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <p class="eyebrow m-0 text-primary">Compétences</p>
+          <h2 class="m-0">Un socle technique solide</h2>
+        </div>
+        <div class="row">
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">HTML5</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">CSS3</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">JavaScript</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Vue.js</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Node.js</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Git</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">SEO</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Accessibilité</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Performance web</div>
+          </div>
+          <div class="col-6 sm:col-4 lg:col-3">
+            <div class="card flex items-center justify-center text-center">Design systems</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section p-y-6 bg-white reveal">
+      <div class="container flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <p class="eyebrow m-0 text-primary">Services</p>
+          <h2 class="m-0">Comment je peux aider</h2>
+        </div>
+        <div class="row">
+          <article class="service card col-12 md:col-6 lg:col-4 flex flex-col gap-2">
+            <h3 class="m-0">Intégration web</h3>
+            <p class="m-0">Maquettage fidèle aux maquettes Figma, composants réutilisables et responsive.</p>
+          </article>
+          <article class="service card col-12 md:col-6 lg:col-4 flex flex-col gap-2">
+            <h3 class="m-0">Création de landing pages</h3>
+            <p class="m-0">Pages optimisées pour la conversion avec mesures de performance.</p>
+          </article>
+          <article class="service card col-12 md:col-6 lg:col-4 flex flex-col gap-2">
+            <h3 class="m-0">Audit & optimisation</h3>
+            <p class="m-0">Analyse Lighthouse, amélioration de l’accessibilité et du SEO.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section p-y-6 bg-primary-light reveal">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 lg:col-6 flex flex-col gap-2">
+            <p class="eyebrow m-0 text-primary">À propos</p>
+            <h2 class="m-0">Parcours & objectifs</h2>
+            <p class="m-0">Passionné par le web, j’ai construit des projets variés : dashboards, sites vitrines et outils internes. Mon objectif : rejoindre une équipe en alternance pour continuer d’apprendre tout en apportant mes compétences en intégration et en animation front.</p>
+            <p class="m-0">Je propose également des missions freelance pour accompagner les entreprises sur leurs besoins d’interface, de performance et d’accessibilité.</p>
+          </div>
+          <div class="col-12 lg:col-6 row">
+            <div class="about-card card col-12 sm:col-6 flex flex-col gap-2">
+              <h3 class="m-0">Valeurs</h3>
+              <p class="m-0">Rigueur, collaboration, écoute des utilisateurs.</p>
+            </div>
+            <div class="about-card card col-12 sm:col-6 flex flex-col gap-2">
+              <h3 class="m-0">Façon de travailler</h3>
+              <p class="m-0">Sprints courts, prototypage rapide, feedbacks continus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section p-y-6 bg-white reveal">
+      <div class="container">
+        <div class="row items-start">
+          <div class="col-12 lg:col-5 flex flex-col gap-2">
+            <p class="eyebrow m-0 text-primary">Contact</p>
+            <h2 class="m-0">Restons en contact</h2>
+            <ul class="contact-list flex flex-col gap-2">
+              <li><span class="label text-primary">Email</span> contact[at]portfolio.dev</li>
+              <li><span class="label text-primary">LinkedIn</span> linkedin.com/in/mon-profil</li>
+              <li><span class="label text-primary">CV</span> <a href="#" aria-label="Télécharger mon CV">Télécharger le PDF</a></li>
+            </ul>
+          </div>
+          <form class="contact-form card col-12 lg:col-7 flex flex-col gap-3" novalidate>
+            <label class="flex flex-col gap-1">Nom
+              <input type="text" name="name" required />
+            </label>
+            <label class="flex flex-col gap-1">Email
+              <input type="email" name="email" required />
+            </label>
+            <label class="flex flex-col gap-1">Message
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button type="submit" class="btn">Envoyer</button>
+            <p class="form-hint">Le formulaire est non fonctionnel pour cette version. Données non envoyées.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="m-0">© 2024 Portfolio Développeur. Alternance & freelance.</p>
+    </div>
+  </footer>
+
+  <script src="./assets/js/portfolio.js"></script>
+</body>
+</html>
