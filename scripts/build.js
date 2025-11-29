@@ -87,15 +87,15 @@ function generateTypography(theme) {
 }
 
 function generateContainer(theme) {
-  const { layout, spacing } = theme;
+  const { spacing } = theme;
   const { number: baseNumber, unit: baseUnit } = parseUnit(spacing?.baseUnit || '16px');
-  return `.container {\n  max-width: ${layout.container};\n  margin: 0 auto;\n  padding: 0 ${baseNumber}${baseUnit};\n}\n\n`;
+  return `.container {\n  width: 100%;\n  margin: 0 auto;\n  padding: 0 ${baseNumber}${baseUnit};\n}\n\n`;
 }
 
 function generateGrid(theme) {
   const { layout, spacing } = theme;
   const { number: baseNumber, unit: baseUnit } = parseUnit(spacing?.baseUnit || '16px');
-  let css = `.row {\n  display: flex;\n  flex-wrap: wrap;\n  gap: ${baseNumber}${baseUnit};\n}\n\n`;
+  let css = `.row {\n  display: flex;\n flex-direction: row;\n  gap: ${baseNumber}${baseUnit};\n}\n\n`;
 
   for (let i = 1; i <= layout.cols; i += 1) {
     const percentage = ((i / layout.cols) * 100).toFixed(4);
@@ -185,7 +185,7 @@ function generateFlexUtilities(layout) {
   css += '\n';
 
   Object.entries(layout.breakpoints).forEach(([prefix, size]) => {
-    css += `@media (min-width: ${size}) {\n`;
+    css += `@media (max-width: ${size}) {\n`;
     Object.entries(definitions).forEach(([className, rules]) => {
       css += `  .${prefix}\\:${className} { ${rules} }\n`;
     });
@@ -217,7 +217,7 @@ function generateComponents(config, theme) {
   }
 
   if (components.includes('card')) {
-    parts.card = `.card {\n  background: white;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  padding: ${spacingValue(spacing.baseUnit, 1.5)};\n  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);\n  transition: box-shadow ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.card:hover { box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); transform: translateY(-2px); }\n.card + .card { margin-top: ${baseMargin}; }\n\n`;
+    parts.card = `.card {\n  background: white;\n  border: 1px solid #e5e7eb;\n  border-radius: 12px;\n  padding: ${spacingValue(spacing.baseUnit, 1.5)};\n  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);\n  transition: box-shadow ${transition.duration} ${transition.type}, transform ${transition.duration} ${transition.type};\n}\n.card:hover { box-shadow: 0 15px 40px rgba(15, 23, 42, 0.12); transform: translateY(-2px); }\n\n`;
   }
 
   if (components.includes('alert')) {

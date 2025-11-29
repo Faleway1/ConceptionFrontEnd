@@ -52,7 +52,7 @@ function smoothScrollSetup() {
 
 function createProjectCard(project) {
   const card = document.createElement('article');
-  card.className = 'card project-card reveal col-12 sm:col-6 lg:col-4';
+  card.className = 'card project-card reveal col-12 justify-between';
   card.dataset.type = project.type;
 
   const header = document.createElement('div');
